@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGradMask" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#1d4ed8" />
+    </linearGradient>
+  </defs>
+
+  <!-- Full-bleed background for maskable icon -->
+  <rect width="512" height="512" fill="url(#bgGradMask)" />
+
+  <!-- Brain & Cognitive Nodes Group centered in safe zone (within 80% circle) -->
+  <g transform="translate(102, 102) scale(0.60)">
+    <!-- Main Brain Shape -->
+    <path d="M256 90c-25 0-47 12-61 31-15-7-33-11-51-11-53 0-96 43-96 96 0 14 3 27 8 39-26 17-44 47-44 80 0 53 43 96 96 96 15 0 29-3 42-10 17 25 46 41 78 41 10 0 20-2 28-5 9 3 18 5 28 5 32 0 61-16 78-41 13 7 27 10 42 10 53 0 96-43 96-96 0-33-18-63-44-80 5-12 8-25 8-39 0-53-43-96-96-96-18 0-36 4-51 11-14-19-36-31-61-31z" 
+          fill="none" 
+          stroke="#ffffff" 
+          stroke-width="28" 
+          stroke-linecap="round" 
+          stroke-linejoin="round" />
+
+    <!-- Center divider -->
+    <path d="M256 90 v357" 
+          stroke="#93c5fd" 
+          stroke-width="24" 
+          stroke-linecap="round" 
+          stroke-dasharray="8 16" />
+
+    <!-- Internal Ebbinghaus Spaced Intervals Waves -->
+    <path d="M140 240 Q180 190 256 240 T372 240" 
+          fill="none" 
+          stroke="#bfdbfe" 
+          stroke-width="20" 
+          stroke-linecap="round" />
+
+    <path d="M120 320 Q190 270 256 320 T392 320" 
+          fill="none" 
+          stroke="#bfdbfe" 
+          stroke-width="20" 
+          stroke-linecap="round" />
+
+    <!-- Memory Nodes -->
+    <circle cx="256" cy="170" r="18" fill="#fbbf24" />
+    <circle cx="180" cy="275" r="16" fill="#34d399" />
+    <circle cx="332" cy="275" r="16" fill="#34d399" />
+    <circle cx="256" cy="360" r="18" fill="#60a5fa" />
+  </g>
+</svg>

@@ -1,0 +1,6 @@
+{
+  "appId": "ir.tpmm286.amirreza.yadman",
+  "appName": "یادمان",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+    <title>یادمان - سامانه برنامه‌ریزی و مرور هوشمند</title>
+    <meta name="description" content="برنامه‌ریزی و مدیریت هوشمند مرور مطالب بر اساس منحنی فراموشی هرمان ابینگهاوس" />
+    <meta name="theme-color" content="#2563eb" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="یادمان" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png" />
+    <link rel="preload" href="/fonts/vazirmatn-400.ttf" as="font" type="font/ttf" crossorigin />
+    <link rel="preload" href="/fonts/vazirmatn-600.ttf" as="font" type="font/ttf" crossorigin />
+    <meta property="og:title" content="یادمان - سامانه برنامه‌ریزی و مرور هوشمند" />
+    <meta property="og:description" content="برنامه‌ریزی و مدیریت هوشمند مرور مطالب بر اساس منحنی فراموشی هرمان ابینگهاوس" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script>
+      // Early detection for older Android WebView (< Chrome 84) and legacy browsers that lack flex gap
+      (function() {
+        try {
+          var flex = document.createElement('div');
+          flex.style.display = 'flex';
+          flex.style.flexDirection = 'column';
+          flex.style.rowGap = '1px';
+          flex.appendChild(document.createElement('div'));
+          flex.appendChild(document.createElement('div'));
+          document.documentElement.appendChild(flex);
+          var isSupported = flex.scrollHeight === 1;
+          if (flex.parentNode) flex.parentNode.removeChild(flex);
+          if (!isSupported) {
+            document.documentElement.className += ' no-flex-gap';
+          }
+        } catch(e) {}
+      })();
+    </script>
+  </head>
+  <body class="bg-slate-50 text-slate-800 antialiased font-sans selection:bg-blue-200 selection:text-blue-900 min-h-screen">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

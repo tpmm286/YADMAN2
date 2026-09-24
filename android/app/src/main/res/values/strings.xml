@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">یادمان</string>
+    <string name="title_activity_main">یادمان</string>
+    <string name="package_name">ir.tpmm286.amirreza.yadman</string>
+    <string name="custom_url_scheme">ir.tpmm286.amirreza.yadman</string>
+</resources>

@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مولد لایسنس زمان‌دار و پلتفرم یادمان (نسخه مستقل ادمین)</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+    .font-mono-key {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      letter-spacing: 0.08em;
+    }
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-800 min-h-screen antialiased flex flex-col justify-between selection:bg-blue-600 selection:text-white">
+
+  <!-- Header -->
+  <header class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white shadow-lg border-b border-indigo-900/50 sticky top-0 z-30">
+    <div class="max-w-6xl mx-auto px-4 py-4 sm:px-6 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center shadow-md shadow-blue-500/30 text-white font-black text-xl">
+          ⚡
+        </div>
+        <div>
+          <h1 class="text-base sm:text-lg font-black tracking-tight flex items-center gap-2">
+            <span>مولد لایسنس زمان‌دار و پلتفرم یادمان</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-400/30 font-medium">نسخه اختصاصی Admin ۳.۰</span>
+          </h1>
+          <p class="text-xs text-slate-400 mt-0.5">سیستم تولید و اعتبارسنجی آفلاین کلیدهای لایسنس با امضای دیجیتال ۴ بخشی</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 text-xs">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/80 text-emerald-300 border border-emerald-700/50 font-medium">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          ۱۰۰٪ آفلاین و بدون نیاز به اینترنت
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-6xl mx-auto px-4 py-6 sm:px-6 w-full flex-1 space-y-6">
+
+    <!-- Navigation Tabs -->
+    <div class="flex border-b border-slate-200 bg-white rounded-2xl shadow-xs p-1.5 gap-2">
+      <button id="tabBtnGenerator" onclick="switchTab('generator')" class="flex-1 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all bg-blue-600 text-white shadow-xs cursor-pointer">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+        <span>صدور لایسنس جدید (تکی و گروهی)</span>
+      </button>
+
+      <button id="tabBtnValidator" onclick="switchTab('validator')" class="flex-1 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-50 cursor-pointer">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+        <span>بررسی و رمزگشایی کلید (Validator)</span>
+      </button>
+
+      <button id="tabBtnDocs" onclick="switchTab('docs')" class="flex-1 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-50 cursor-pointer">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+        <span>مستندات معماری رمزنگاری</span>
+      </button>
+    </div>
+
+    <!-- ==================== TAB 1: GENERATOR ==================== -->
+    <div id="tabGenerator" class="space-y-6">
+      
+      <!-- Generator Parameters Card -->
+      <div class="bg-white rounded-3xl p-5 sm:p-7 shadow-xs border border-slate-200/90 space-y-6">
+        <div class="border-b border-slate-100 pb-4 flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <h2 class="text-base font-black text-slate-900 flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-blue-600"></span>
+              <span>تنظیم پارامترهای صدور لایسنس زمان‌دار</span>
+            </h2>
+            <p class="text-xs text-slate-500 mt-1">کلیه مشخصات در رشته لایسنس ۴ بخشی با سالت اختصاصی کدگذاری می‌شوند.</p>
+          </div>
+          <button onclick="resetGeneratorDefaults()" class="text-xs text-blue-600 hover:text-blue-800 font-bold hover:underline cursor-pointer">
+            بازنشانی به مقادیر پیش‌فرض
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+          <!-- 1. License Tier -->
+          <div class="space-y-2">
+            <label class="text-xs font-bold text-slate-700 flex items-center justify-between">
+              <span>۱. نوع لایسنس و سطح دسترسی (Tier):</span>
+              <span id="tierBadge" class="text-[11px] font-mono text-blue-600 bg-blue-50 px-2 py-0.5 rounded">کد: P</span>
+            </label>
+            <div class="grid grid-cols-3 gap-2" id="tierGroup">
+              <button type="button" onclick="selectTier('PRO')" class="tier-btn active p-3 rounded-2xl border-2 border-blue-600 bg-blue-50/70 text-blue-950 font-bold text-right transition-all cursor-pointer">
+                <div class="text-xs font-black">حرفه‌ای (Pro)</div>
+                <div class="text-[10px] text-slate-500 mt-1 font-normal leading-relaxed">کامل‌ترین امکانات + خروجی کامل PDF برنامه</div>
+              </button>
+
+              <button type="button" onclick="selectTier('STUDENT')" class="tier-btn p-3 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold text-right transition-all cursor-pointer">
+                <div class="text-xs font-black">دانش‌آموزی (Student)</div>
+                <div class="text-[10px] text-slate-500 mt-1 font-normal leading-relaxed">خروجی برنامه فقط در دوره آزمایشی مجاز است</div>
+              </button>
+
+              <button type="button" onclick="selectTier('ENTERPRISE')" class="tier-btn p-3 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold text-right transition-all cursor-pointer">
+                <div class="text-xs font-black">سازمانی (Enterprise)</div>
+                <div class="text-[10px] text-slate-500 mt-1 font-normal leading-relaxed">ویژه مدارس و آموزشگاه‌ها با تمامی خروجی‌ها</div>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2. Target Platform -->
+          <div class="space-y-2">
+            <label class="text-xs font-bold text-slate-700 flex items-center justify-between">
+              <span>۲. پلتفرم مجاز دستگاه (Platform):</span>
+              <span id="platformBadge" class="text-[11px] font-mono text-blue-600 bg-blue-50 px-2 py-0.5 rounded">کد: A</span>
+            </label>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2" id="platformGroup">
+              <button type="button" onclick="selectPlatform('ALL')" class="platform-btn active p-2.5 rounded-2xl border-2 border-blue-600 bg-blue-50/70 text-blue-950 font-bold text-center transition-all cursor-pointer">
+                <div class="text-xs font-black">عمومی (ALL)</div>
+                <div class="text-[10px] text-slate-500 mt-0.5 font-normal">تمام دستگاه‌ها</div>
+              </button>
+
+              <button type="button" onclick="selectPlatform('DESKTOP')" class="platform-btn p-2.5 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold text-center transition-all cursor-pointer">
+                <div class="text-xs font-black">دسکتاپ</div>
+                <div class="text-[10px] text-slate-500 mt-0.5 font-normal">ویندوز و PC</div>
+              </button>
+
+              <button type="button" onclick="selectPlatform('MOBILE')" class="platform-btn p-2.5 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold text-center transition-all cursor-pointer">
+                <div class="text-xs font-black">موبایل</div>
+                <div class="text-[10px] text-slate-500 mt-0.5 font-normal">اندروید و iOS</div>
+              </button>
+
+              <button type="button" onclick="selectPlatform('WEB')" class="platform-btn p-2.5 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold text-center transition-all cursor-pointer">
+                <div class="text-xs font-black">تحت وب</div>
+                <div class="text-[10px] text-slate-500 mt-0.5 font-normal">PWA و مرورگر</div>
+              </button>
+            </div>
+          </div>
+
+          <!-- 3. License Duration -->
+          <div class="space-y-2">
+            <label class="text-xs font-bold text-slate-700 flex items-center justify-between">
+              <span>۳. مدت اعتبار دسترسی پس از فعال‌سازی (Duration):</span>
+              <span id="durationBadge" class="text-[11px] font-mono text-blue-600 bg-blue-50 px-2 py-0.5 rounded">کد: Y (۳۶۵ روز)</span>
+            </label>
+            <div class="grid grid-cols-3 sm:grid-cols-6 gap-2" id="durationGroup">
+              <button type="button" onclick="selectDuration('1M')" class="duration-btn p-2 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold text-center transition-all cursor-pointer">
+                <div class="text-xs font-black">۱ ماهه</div>
+                <div class="text-[10px] text-slate-500 font-normal">۳۰ روز</div>
+              </button>
+
+              <button type="button" onclick="selectDuration('3M')" class="duration-btn p-2 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold text-center transition-all cursor-pointer">
+                <div class="text-xs font-black">۳ ماهه</div>
+                <div class="text-[10px] text-slate-500 font-normal">۹۰ روز</div>
+              </button>
+
+              <button type="button" onclick="selectDuration('6M')" class="duration-btn p-2 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold text-center transition-all cursor-pointer">
+                <div class="text-xs font-black">۶ ماهه</div>
+                <div class="text-[10px] text-slate-500 font-normal">۱۸۰ روز</div>
+              </button>
+
+              <button type="button" onclick="selectDuration('1Y')" class="duration-btn active p-2 rounded-2xl border-2 border-blue-600 bg-blue-50/70 text-blue-950 font-bold text-center transition-all cursor-pointer">
+                <div class="text-xs font-black">۱ ساله</div>
+                <div class="text-[10px] text-slate-500 font-normal">۳۶۵ روز</div>
+              </button>
+
+              <button type="button" onclick="selectDuration('2Y')" class="duration-btn p-2 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold text-center transition-all cursor-pointer">
+                <div class="text-xs font-black">۲ ساله</div>
+                <div class="text-[10px] text-slate-500 font-normal">۷۳۰ روز</div>
+              </button>
+
+              <button type="button" onclick="selectDuration('LIFETIME')" class="duration-btn p-2 rounded-2xl border border-amber-300 bg-amber-50/50 hover:bg-amber-100/50 text-amber-900 font-bold text-center transition-all cursor-pointer">
+                <div class="text-xs font-black">دائمی</div>
+                <div class="text-[10px] text-amber-700 font-normal">مادام‌العمر</div>
+              </button>
+            </div>
+          </div>
+
+          <!-- 4. Activation Window Deadline -->
+          <div class="space-y-2">
+            <label class="text-xs font-bold text-amber-950 flex items-center justify-between">
+              <span>۴. مهلت زمانی مجاز برای وارد کردن کلید (Activation Window):</span>
+              <span id="windowBadge" class="text-[11px] font-mono text-amber-700 bg-amber-100 px-2 py-0.5 rounded">کد: 3 (۳ روز)</span>
+            </label>
+            <div class="grid grid-cols-2 sm:grid-cols-5 gap-2" id="windowGroup">
+              <button type="button" onclick="selectWindow('3D')" class="window-btn active p-2.5 rounded-2xl border-2 border-amber-500 bg-amber-50 text-amber-950 font-bold text-center transition-all cursor-pointer">
+                <div class="text-xs font-black">۳ روزه</div>
+                <div class="text-[10px] text-amber-800 font-normal">مهلت سریع</div>
+              </button>
+
+              <button type="button" onclick="selectWindow('7D')" class="window-btn p-2.5 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold text-center transition-all cursor-pointer">
+                <div class="text-xs font-black">۷ روزه</div>
+                <div class="text-[10px] text-slate-500 font-normal">۱ هفته</div>
+              </button>
+
+              <button type="button" onclick="selectWindow('14D')" class="window-btn p-2.5 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold text-center transition-all cursor-pointer">
+                <div class="text-xs font-black">۱۴ روزه</div>
+                <div class="text-[10px] text-slate-500 font-normal">۲ هفته</div>
+              </button>
+
+              <button type="button" onclick="selectWindow('30D')" class="window-btn p-2.5 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold text-center transition-all cursor-pointer">
+                <div class="text-xs font-black">۳۰ روزه</div>
+                <div class="text-[10px] text-slate-500 font-normal">۱ ماه</div>
+              </button>
+
+              <button type="button" onclick="selectWindow('UNLIMITED')" class="window-btn p-2.5 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold text-center transition-all cursor-pointer">
+                <div class="text-xs font-black">نامحدود</div>
+                <div class="text-[10px] text-slate-500 font-normal">بدون مهلت</div>
+              </button>
+            </div>
+            <p class="text-[11px] text-slate-500">خریدار فقط تا پایان این مهلت پس از تاریخ صدور فرصت دارد کلید را در نرم‌افزار وارد نماید.</p>
+          </div>
+
+        </div>
+
+        <!-- Issue Date & Batch Settings -->
+        <div class="pt-4 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-3 gap-4 items-end">
+          <div class="space-y-1.5">
+            <label class="text-xs font-bold text-slate-700">تاریخ مبنای صدور کلید:</label>
+            <input type="date" id="issueDateInput" class="w-full px-3 py-2 text-xs font-mono border border-slate-300 rounded-xl focus:border-blue-500 focus:outline-hidden bg-slate-50">
+          </div>
+
+          <div class="space-y-1.5">
+            <label class="text-xs font-bold text-slate-700">تعداد کلیدهای درخواستی (تولید گروهی):</label>
+            <div class="flex items-center gap-1.5">
+              <select id="batchCountSelect" onchange="handleBatchCountChange()" class="w-full px-3 py-2 text-xs font-bold border border-slate-300 rounded-xl focus:border-blue-500 focus:outline-hidden bg-white">
+                <option value="1" selected>۱ عدد (صدور تکی)</option>
+                <option value="5">۵ عدد</option>
+                <option value="10">۱۰ عدد</option>
+                <option value="20">۲۰ عدد</option>
+                <option value="50">۵۰ عدد</option>
+                <option value="custom">تعداد دلخواه...</option>
+              </select>
+              <input type="number" id="customCountInput" min="1" max="500" value="1" class="hidden w-24 px-2 py-2 text-xs font-bold text-center border border-blue-400 rounded-xl focus:outline-hidden">
+            </div>
+          </div>
+
+          <div>
+            <button type="button" onclick="handleGenerateAction()" class="w-full py-2.5 px-4 bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 hover:from-blue-700 hover:to-indigo-800 text-white rounded-xl text-xs sm:text-sm font-black shadow-md shadow-blue-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-98">
+              <span>✨ صدور کلید لایسنس زمان‌دار</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Generated Keys Display Section -->
+      <div id="outputSection" class="hidden bg-slate-900 text-white rounded-3xl p-5 sm:p-7 shadow-xl border border-slate-800 space-y-5 animate-in fade-in">
+        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-4">
+          <div>
+            <div class="text-xs font-bold text-slate-400">نتیجه صدور لایسنس:</div>
+            <div class="text-sm font-black text-emerald-400 flex items-center gap-2 mt-0.5">
+              <span>✓ کلید(ها) با موفقیت تولید و امضا شدند</span>
+              <span id="outputCountBadge" class="text-xs px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 font-mono">تعداد: ۱</span>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2">
+            <button onclick="copyAllKeys()" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-200 transition-all flex items-center gap-1.5 cursor-pointer">
+              <span id="copyAllIcon">📋</span>
+              <span id="copyAllText">کپی کلیدها</span>
+            </button>
+
+            <button onclick="downloadAsTxt()" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-200 transition-all flex items-center gap-1.5 cursor-pointer">
+              <span>💾</span>
+              <span>دانلود فایل TXT</span>
+            </button>
+
+            <button onclick="downloadAsCsv()" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-200 transition-all flex items-center gap-1.5 cursor-pointer">
+              <span>📊</span>
+              <span>خروجی CSV</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Decoded Spec Banner -->
+        <div id="outputSpecBanner" class="p-3.5 rounded-2xl bg-slate-800/80 border border-slate-700/80 text-xs text-slate-300 grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <!-- Filled dynamically -->
+        </div>
+
+        <!-- Keys List -->
+        <div class="space-y-2">
+          <div class="text-xs text-slate-400 font-bold">لیست کلیدهای صادر شده:</div>
+          <div id="keysContainer" class="max-h-80 overflow-y-auto space-y-2 pr-1">
+            <!-- Filled dynamically -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ==================== TAB 2: VALIDATOR ==================== -->
+    <div id="tabValidator" class="hidden space-y-6">
+      <div class="bg-white rounded-3xl p-5 sm:p-7 shadow-xs border border-slate-200/90 space-y-5">
+        <div>
+          <h2 class="text-base font-black text-slate-900 flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-emerald-600"></span>
+            <span>اعتبارسنجی، بازرسی و رمزگشایی ساختار کلید لایسنس</span>
+          </h2>
+          <p class="text-xs text-slate-500 mt-1">کلید لایسنس صادر شده را وارد نمایید تا سلامت امضا، تاریخ صدور، مهلت وارد کردن و مشخصات آن کالبدشکافی گردد.</p>
+        </div>
+
+        <div class="space-y-3">
+          <div class="flex gap-2">
+            <input type="text" id="validatorInput" placeholder="YADM-XXXX-XXXX-XXXX-XXXX" class="flex-1 px-4 py-3 text-sm font-mono-key text-slate-900 bg-slate-50 border border-slate-300 rounded-2xl focus:border-blue-500 focus:bg-white focus:outline-hidden text-center uppercase tracking-widest">
+            <button onclick="handleValidateAction()" class="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-2xl text-xs sm:text-sm font-bold shadow-md transition-all cursor-pointer">
+              بررسی و رمزگشایی
+            </button>
+          </div>
+
+          <div class="flex items-center justify-between text-xs text-slate-500 px-1">
+            <span>فرمت استاندارد: ۴ بلوک ۴ کاراکتری با پیشوند YADM</span>
+            <button onclick="pasteToValidator()" class="text-blue-600 hover:underline font-bold cursor-pointer">پیست از کلیپ‌بورد</button>
+          </div>
+        </div>
+
+        <!-- Validation Results Area -->
+        <div id="validationResultCard" class="hidden p-5 rounded-2xl border space-y-4">
+          <!-- Filled dynamically -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 3: DOCS ==================== -->
+    <div id="tabDocs" class="hidden space-y-6">
+      <div class="bg-white rounded-3xl p-5 sm:p-7 shadow-xs border border-slate-200/90 space-y-6">
+        <div>
+          <h2 class="text-base font-black text-slate-900 flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-indigo-600"></span>
+            <span>مستندات معماری رمزنگاری و ساختار کلیدهای زمان‌دار</span>
+          </h2>
+          <p class="text-xs text-slate-500 mt-1">چگونه سیستم لایسنس یادمان بدون وابستگی به سرور، زمان صدور، مهلت وارد کردن و نسخه را مدیریت و اعتبارسنجی می‌کند.</p>
+        </div>
+
+        <div class="p-4 bg-slate-900 text-emerald-400 rounded-2xl font-mono text-xs overflow-x-auto space-y-2" dir="ltr">
+          <div class="text-amber-300 font-bold">FORMAT: YADM-[B1]-[B2]-[B3]-[B4]</div>
+          <div class="text-slate-400">Total length: 24 characters (including dashes)</div>
+          <div class="border-t border-slate-800 pt-2 space-y-1">
+            <div>B1: [Tier][Platform][Duration][ActivationWindow]</div>
+            <div>&nbsp;&nbsp;Tier: P (Pro), S (Student), E (Enterprise)</div>
+            <div>&nbsp;&nbsp;Platform: A (All), D (Desktop), M (Mobile), W (Web)</div>
+            <div>&nbsp;&nbsp;Duration: M (1M), Q (3M), H (6M), Y (1Y), T (2Y), L (Lifetime)</div>
+            <div>&nbsp;&nbsp;ActivationWindow: 3 (3 days), 7 (7 days), F (14 days), N (30 days), U (Unlimited)</div>
+            <div>B2: [D0][D1][D2][Checksum2] (Base-32 day encoding since 2025-01-01 + deterministic checksum)</div>
+            <div>B3: [R1][R2][R3][Checksum3] (Random cryptographic entropy so identical parameters produce unique keys)</div>
+            <div>B4: Master Signature (High-avalanche rolling hash of B1, B2, B3 salted with 'YADMAN_SALT_2026')</div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+          <div class="p-4 rounded-2xl bg-blue-50/70 border border-blue-200 space-y-2">
+            <div class="font-bold text-blue-900 flex items-center gap-1.5">
+              <span>🔒</span>
+              <span>الفبای ایمن (Safe Base-32)</span>
+            </div>
+            <p class="text-slate-600 leading-relaxed">
+              الفبای کلید شامل ۳۲ کاراکتر <code>23456789ABCDEFGHJKLMNPQRSTUVWXYZ</code> است. برای جلوگیری از خطای دید کاربر حروف و ارقام مبهم مانند 0, 1, I, O کاملاً حذف شده‌اند.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-amber-50/70 border border-amber-200 space-y-2">
+            <div class="font-bold text-amber-900 flex items-center gap-1.5">
+              <span>⏳</span>
+              <span>مهلت وارد کردن (Activation Window)</span>
+            </div>
+            <p class="text-slate-600 leading-relaxed">
+              با تنظیم مهلت (مثلاً ۳ یا ۷ روز)، خریدار نمی‌تواند کلید را ماه‌ها بعد فعال کند. پس از سپری شدن مهلت از تاریخ صدور، کلید توسط کلاینت به عنوان منقضی شده رد می‌شود.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-emerald-50/70 border border-emerald-200 space-y-2">
+            <div class="font-bold text-emerald-900 flex items-center gap-1.5">
+              <span>🛡️</span>
+              <span>نسخه دانش‌آموز vs حرفه‌ای</span>
+            </div>
+            <p class="text-slate-600 leading-relaxed">
+              در نسخه دانش‌آموز (کد S)، قابلیت خروجی گرفتن برنامه پس از پایان دوره آزمایشی کاملاً مخفی و ناپدید می‌گردد، در حالی که نسخه حرفه‌ای (کد P) دسترسی کامل خروجی را حفظ می‌کند.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-200 py-4 px-4 text-center text-xs text-slate-500">
+    <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div>نرم‌افزار مرور هوشمند ابینگهاوس (یادمان) • پنل مدیریت و صدور لایسنس مستقل</div>
+      <div class="text-[11px] font-mono text-slate-400">YADMAN-CRYPTO-V3-STANDALONE</div>
+    </div>
+  </footer>
+
+  <!-- Cryptographic & Generator Engine Script -->
+  <script>
+    // ==========================================
+    // 1. Cryptographic Constants & Lookup Tables
+    // ==========================================
+    const LICENSE_CHARSET = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
+    const CHARSET_MAP = new Map();
+    for (let i = 0; i < LICENSE_CHARSET.length; i++) {
+      CHARSET_MAP.set(LICENSE_CHARSET[i], i);
+    }
+
+    const BASE_EPOCH_ISO = '2025-01-01T00:00:00.000Z';
+    const BASE_EPOCH_MS = new Date(BASE_EPOCH_ISO).getTime();
+
+    const TIER_CONFIG = {
+      PRO: { code: 'P', label: 'نسخه حرفه‌ای (Pro)', desc: 'کامل‌ترین امکانات و خروجی کامل PDF' },
+      STUDENT: { code: 'S', label: 'نسخه دانش‌آموزی (Student)', desc: 'محدودسازی خروجی برنامه بعد از آزمایشی' },
+      ENTERPRISE: { code: 'E', label: 'نسخه سازمانی و مدارس (Enterprise)', desc: 'ویژه مدارس با تمامی خروجی‌ها' },
+    };
+
+    const PLATFORM_CONFIG = {
+      ALL: { code: 'A', label: 'تمامی دستگاه‌ها (عمومی)', desc: 'ویندوز، وب، اندروید، iOS' },
+      DESKTOP: { code: 'D', label: 'رایانه و ویندوز (Desktop)', desc: 'مخصوص سیستم‌های ویندوزی و PC' },
+      MOBILE: { code: 'M', label: 'گوشی و تبلت (Mobile)', desc: 'مخصوص اندروید و آیفون' },
+      WEB: { code: 'W', label: 'سامانه تحت وب (Web PWA)', desc: 'مخصوص مرورگر و وب‌اپلیکیشن' },
+    };
+
+    const DURATION_CONFIG = {
+      '1M': { code: 'M', label: '۱ ماهه (۳۰ روز)', days: 30 },
+      '3M': { code: 'Q', label: '۳ ماهه (۹۰ روز)', days: 90 },
+      '6M': { code: 'H', label: '۶ ماهه (۱۸۰ روز)', days: 180 },
+      '1Y': { code: 'Y', label: '۱ ساله (۳۶۵ روز)', days: 365 },
+      '2Y': { code: 'T', label: '۲ ساله (۷۳۰ روز)', days: 730 },
+      'LIFETIME': { code: 'L', label: 'دائمی و مادام‌العمر (Lifetime)', days: 99999 },
+    };
+
+    const ACTIVATION_WINDOW_CONFIG = {
+      '3D': { code: '3', label: '۳ روز پس از صدور', days: 3 },
+      '7D': { code: '7', label: '۷ روز پس از صدور', days: 7 },
+      '14D': { code: 'F', label: '۱۴ روز پس از صدور', days: 14 },
+      '30D': { code: 'N', label: '۳۰ روز پس از صدور', days: 30 },
+      'UNLIMITED': { code: 'U', label: 'بدون محدودیت مهلت وارد کردن', days: 99999 },
+    };
+
+    const CODE_TO_TIER = Object.fromEntries(Object.entries(TIER_CONFIG).map(([k, v]) => [v.code, k]));
+    const CODE_TO_PLATFORM = Object.fromEntries(Object.entries(PLATFORM_CONFIG).map(([k, v]) => [v.code, k]));
+    const CODE_TO_DURATION = Object.fromEntries(Object.entries(DURATION_CONFIG).map(([k, v]) => [v.code, k]));
+    const CODE_TO_WINDOW = Object.fromEntries(Object.entries(ACTIVATION_WINDOW_CONFIG).map(([k, v]) => [v.code, k]));
+
+    // ==========================================
+    // 2. Cryptographic Math & Algorithms
+    // ==========================================
+    function computeMasterSignature(b1, b2, b3) {
+      const combined = `${b1}${b2}${b3}YADMAN_SALT_2026`;
+      let h1 = 0x811c9dc5;
+      let h2 = 0x5bd1e995;
+      for (let i = 0; i < combined.length; i++) {
+        const code = combined.charCodeAt(i);
+        h1 ^= code;
+        h1 = Math.imul(h1, 0x01000193);
+        h2 = ((h2 << 5) + h2 + code) >>> 0;
+      }
+      const unsignedH1 = h1 >>> 0;
+      const unsignedH2 = h2 >>> 0;
+      const i0 = (unsignedH1 >>> 0) & 0x1f;
+      const i1 = (unsignedH1 >>> 5) & 0x1f;
+      const i2 = (unsignedH2 >>> 0) & 0x1f;
+      const i3 = ((unsignedH2 >>> 7) ^ (unsignedH1 >>> 13)) & 0x1f;
+      return (
+        LICENSE_CHARSET[i0] +
+        LICENSE_CHARSET[i1] +
+        LICENSE_CHARSET[i2] +
+        LICENSE_CHARSET[i3]
+      );
+    }
+
+    function encodeDayNumber(dayNum) {
+      const safeDay = Math.max(0, Math.min(32767, Math.floor(dayNum)));
+      const d0 = Math.floor(safeDay / 1024) % 32;
+      const d1 = Math.floor((safeDay % 1024) / 32) % 32;
+      const d2 = safeDay % 32;
+      return [LICENSE_CHARSET[d0], LICENSE_CHARSET[d1], LICENSE_CHARSET[d2]];
+    }
+
+    function decodeDayNumber(c0, c1, c2) {
+      const v0 = CHARSET_MAP.get(c0) ?? 0;
+      const v1 = CHARSET_MAP.get(c1) ?? 0;
+      const v2 = CHARSET_MAP.get(c2) ?? 0;
+      return v0 * 1024 + v1 * 32 + v2;
+    }
+
+    function generateSingleLicenseKey(options = {}) {
+      const tier = options.tier || 'PRO';
+      const platform = options.platform || 'ALL';
+      const duration = options.duration || '1Y';
+      const activationWindow = options.activationWindow || '3D';
+      const issueDate = options.issueDate || new Date();
+
+      const rndChar = () => LICENSE_CHARSET[Math.floor(Math.random() * LICENSE_CHARSET.length)];
+      const val = (c) => CHARSET_MAP.get(c) ?? 0;
+
+      // Block 1: [Tier][Platform][Duration][ActivationWindow]
+      const tierCode = TIER_CONFIG[tier].code;
+      const platformCode = PLATFORM_CONFIG[platform].code;
+      const durationCode = DURATION_CONFIG[duration].code;
+      const windowCode = ACTIVATION_WINDOW_CONFIG[activationWindow].code;
+      const b1 = `${tierCode}${platformCode}${durationCode}${windowCode}`;
+
+      // Block 2: [D0][D1][D2][Checksum2]
+      const diffDays = Math.floor((issueDate.getTime() - BASE_EPOCH_MS) / (24 * 3600 * 1000));
+      const [d0, d1, d2] = encodeDayNumber(diffDays);
+      const cs2Idx = (
+        val(b1[0]) * 3 +
+        val(b1[1]) * 5 +
+        val(b1[2]) * 7 +
+        val(b1[3]) * 11 +
+        val(d0) * 13 +
+        val(d1) * 17 +
+        val(d2) * 19 +
+        23
+      ) % 32;
+      const b2 = `${d0}${d1}${d2}${LICENSE_CHARSET[cs2Idx]}`;
+
+      // Block 3: [R1][R2][R3][Checksum3]
+      const r1 = rndChar();
+      const r2 = rndChar();
+      const r3 = rndChar();
+      const cs3Idx = (val(r1) * 7 + val(r2) * 11 + val(r3) * 13 + 29) % 32;
+      const b3 = `${r1}${r2}${r3}${LICENSE_CHARSET[cs3Idx]}`;
+
+      // Block 4: Master Signature
+      const b4 = computeMasterSignature(b1, b2, b3);
+
+      return `YADM-${b1}-${b2}-${b3}-${b4}`;
+    }
+
+    function validateLicenseString(rawKey) {
+      if (!rawKey || typeof rawKey !== 'string') {
+        return { isValid: false, error: 'لطفاً کلید لایسنس را وارد نمایید.' };
+      }
+      const key = rawKey.trim().toUpperCase().replace(/\s+/g, '');
+      const parts = key.split('-');
+      if (parts.length !== 5) {
+        return { isValid: false, error: 'فرمت کلید نامعتبر است. فرمت صحیح: YADM-XXXX-XXXX-XXXX-XXXX' };
+      }
+      const [prefix, b1, b2, b3, b4] = parts;
+      if (prefix !== 'YADM') {
+        return { isValid: false, error: 'پیشوند کلید باید YADM باشد.' };
+      }
+      if (b1.length !== 4 || b2.length !== 4 || b3.length !== 4 || b4.length !== 4) {
+        return { isValid: false, error: 'طول بلاک‌های لایسنس باید ۴ کاراکتر باشد.' };
+      }
+      const allChars = `${b1}${b2}${b3}${b4}`;
+      for (const ch of allChars) {
+        if (!CHARSET_MAP.has(ch)) {
+          return { isValid: false, error: `کاراکتر غیرمجاز '${ch}' در کلید مشاهده شد.` };
+        }
+      }
+
+      const val = (c) => CHARSET_MAP.get(c) ?? 0;
+
+      // Decode B1
+      const tier = CODE_TO_TIER[b1[0]];
+      const platform = CODE_TO_PLATFORM[b1[1]];
+      const duration = CODE_TO_DURATION[b1[2]];
+      const activationWindow = CODE_TO_WINDOW[b1[3]];
+      if (!tier || !platform || !duration || !activationWindow) {
+        return { isValid: false, error: 'کدهای متغیر در بخش اول لایسنس نامعتبر هستند.' };
+      }
+
+      // Check B2
+      const d0 = b1[0], d1 = b1[1], d2 = b1[2], d3 = b1[3];
+      const b2_0 = b2[0], b2_1 = b2[1], b2_2 = b2[2], b2_cs = b2[3];
+      const expectedCs2 = (
+        val(d0) * 3 +
+        val(d1) * 5 +
+        val(d2) * 7 +
+        val(d3) * 11 +
+        val(b2_0) * 13 +
+        val(b2_1) * 17 +
+        val(b2_2) * 19 +
+        23
+      ) % 32;
+      if (LICENSE_CHARSET[expectedCs2] !== b2_cs) {
+        return { isValid: false, error: 'چک‌سام بخش دوم (تاریخ صدور) نامعتبر است.' };
+      }
+
+      const issueDayNumber = decodeDayNumber(b2_0, b2_1, b2_2);
+      const issueDateMs = BASE_EPOCH_MS + issueDayNumber * 24 * 3600 * 1000;
+      const issueDateObj = new Date(issueDateMs);
+
+      // Check B3
+      const b3_cs = b3[3];
+      const expectedCs3 = (val(b3[0]) * 7 + val(b3[1]) * 11 + val(b3[2]) * 13 + 29) % 32;
+      if (LICENSE_CHARSET[expectedCs3] !== b3_cs) {
+        return { isValid: false, error: 'چک‌سام بخش سوم (آنتروپی) نامعتبر است.' };
+      }
+
+      // Check B4
+      const expectedB4 = computeMasterSignature(b1, b2, b3);
+      if (expectedB4 !== b4) {
+        return { isValid: false, error: 'امضای دیجیتال کلی کلید نامعتبر است. کلید دستکاری شده است!' };
+      }
+
+      const windowDays = ACTIVATION_WINDOW_CONFIG[activationWindow].days;
+      const durationDays = DURATION_CONFIG[duration].days;
+      const activationDeadlineMs = windowDays >= 99999
+        ? issueDateMs + 3650 * 24 * 3600 * 1000
+        : issueDateMs + windowDays * 24 * 3600 * 1000;
+      const isActivationExpired = Date.now() > activationDeadlineMs;
+
+      return {
+        isValid: true,
+        details: {
+          key,
+          tier,
+          tierLabel: TIER_CONFIG[tier].label,
+          platform,
+          platformLabel: PLATFORM_CONFIG[platform].label,
+          duration,
+          durationLabel: DURATION_CONFIG[duration].label,
+          durationDays,
+          activationWindow,
+          activationWindowLabel: ACTIVATION_WINDOW_CONFIG[activationWindow].label,
+          activationWindowDays: windowDays,
+          issueDate: issueDateObj,
+          activationDeadline: new Date(activationDeadlineMs),
+          isActivationExpired,
+        }
+      };
+    }
+
+    // ==========================================
+    // 3. UI State & Event Handlers
+    // ==========================================
+    let currentTier = 'PRO';
+    let currentPlatform = 'ALL';
+    let currentDuration = '1Y';
+    let currentWindow = '3D';
+    let lastGeneratedKeys = [];
+
+    // Set today as default in date input
+    document.addEventListener('DOMContentLoaded', () => {
+      const todayISO = new Date().toISOString().split('T')[0];
+      document.getElementById('issueDateInput').value = todayISO;
+    });
+
+    function switchTab(tabId) {
+      document.getElementById('tabGenerator').classList.toggle('hidden', tabId !== 'generator');
+      document.getElementById('tabValidator').classList.toggle('hidden', tabId !== 'validator');
+      document.getElementById('tabDocs').classList.toggle('hidden', tabId !== 'docs');
+
+      const styleActive = 'bg-blue-600 text-white shadow-xs';
+      const styleInactive = 'text-slate-600 hover:text-slate-900 hover:bg-slate-50';
+
+      const btnGen = document.getElementById('tabBtnGenerator');
+      const btnVal = document.getElementById('tabBtnValidator');
+      const btnDoc = document.getElementById('tabBtnDocs');
+
+      btnGen.className = `flex-1 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${tabId === 'generator' ? styleActive : styleInactive}`;
+      btnVal.className = `flex-1 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${tabId === 'validator' ? styleActive : styleInactive}`;
+      btnDoc.className = `flex-1 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${tabId === 'docs' ? styleActive : styleInactive}`;
+    }
+
+    function selectTier(tier) {
+      currentTier = tier;
+      document.querySelectorAll('.tier-btn').forEach(btn => {
+        btn.classList.remove('border-2', 'border-blue-600', 'bg-blue-50/70', 'text-blue-950');
+        btn.classList.add('border-slate-200', 'bg-white', 'text-slate-700');
+      });
+      event.currentTarget.classList.remove('border-slate-200', 'bg-white', 'text-slate-700');
+      event.currentTarget.classList.add('border-2', 'border-blue-600', 'bg-blue-50/70', 'text-blue-950');
+      document.getElementById('tierBadge').textContent = `کد: ${TIER_CONFIG[tier].code}`;
+    }
+
+    function selectPlatform(platform) {
+      currentPlatform = platform;
+      document.querySelectorAll('.platform-btn').forEach(btn => {
+        btn.classList.remove('border-2', 'border-blue-600', 'bg-blue-50/70', 'text-blue-950');
+        btn.classList.add('border-slate-200', 'bg-white', 'text-slate-700');
+      });
+      event.currentTarget.classList.remove('border-slate-200', 'bg-white', 'text-slate-700');
+      event.currentTarget.classList.add('border-2', 'border-blue-600', 'bg-blue-50/70', 'text-blue-950');
+      document.getElementById('platformBadge').textContent = `کد: ${PLATFORM_CONFIG[platform].code}`;
+    }
+
+    function selectDuration(duration) {
+      currentDuration = duration;
+      document.querySelectorAll('.duration-btn').forEach(btn => {
+        btn.classList.remove('border-2', 'border-blue-600', 'bg-blue-50/70', 'text-blue-950');
+        btn.classList.add('border-slate-200', 'bg-white', 'text-slate-700');
+      });
+      event.currentTarget.classList.remove('border-slate-200', 'bg-white', 'text-slate-700');
+      event.currentTarget.classList.add('border-2', 'border-blue-600', 'bg-blue-50/70', 'text-blue-950');
+      const conf = DURATION_CONFIG[duration];
+      document.getElementById('durationBadge').textContent = `کد: ${conf.code} (${conf.days === 99999 ? 'مادام‌العمر' : conf.days + ' روز'})`;
+    }
+
+    function selectWindow(windowKey) {
+      currentWindow = windowKey;
+      document.querySelectorAll('.window-btn').forEach(btn => {
+        btn.classList.remove('border-2', 'border-amber-500', 'bg-amber-50', 'text-amber-950');
+        btn.classList.add('border-slate-200', 'bg-white', 'text-slate-700');
+      });
+      event.currentTarget.classList.remove('border-slate-200', 'bg-white', 'text-slate-700');
+      event.currentTarget.classList.add('border-2', 'border-amber-500', 'bg-amber-50', 'text-amber-950');
+      const conf = ACTIVATION_WINDOW_CONFIG[windowKey];
+      document.getElementById('windowBadge').textContent = `کد: ${conf.code} (${conf.days === 99999 ? 'نامحدود' : conf.days + ' روز'})`;
+    }
+
+    function handleBatchCountChange() {
+      const sel = document.getElementById('batchCountSelect').value;
+      const customInput = document.getElementById('customCountInput');
+      if (sel === 'custom') {
+        customInput.classList.remove('hidden');
+        customInput.focus();
+      } else {
+        customInput.classList.add('hidden');
+      }
+    }
+
+    function resetGeneratorDefaults() {
+      selectTier('PRO');
+      selectPlatform('ALL');
+      selectDuration('1Y');
+      selectWindow('3D');
+      document.getElementById('batchCountSelect').value = '1';
+      document.getElementById('customCountInput').classList.add('hidden');
+      document.getElementById('customCountInput').value = '1';
+      document.getElementById('issueDateInput').value = new Date().toISOString().split('T')[0];
+    }
+
+    function handleGenerateAction() {
+      const selVal = document.getElementById('batchCountSelect').value;
+      let count = 1;
+      if (selVal === 'custom') {
+        count = Math.max(1, Math.min(500, parseInt(document.getElementById('customCountInput').value || '1', 10)));
+      } else {
+        count = parseInt(selVal, 10);
+      }
+
+      const dateVal = document.getElementById('issueDateInput').value;
+      const issueDate = dateVal ? new Date(dateVal + 'T12:00:00Z') : new Date();
+
+      lastGeneratedKeys = [];
+      for (let i = 0; i < count; i++) {
+        const key = generateSingleLicenseKey({
+          tier: currentTier,
+          platform: currentPlatform,
+          duration: currentDuration,
+          activationWindow: currentWindow,
+          issueDate: issueDate
+        });
+        lastGeneratedKeys.push(key);
+      }
+
+      renderGeneratedKeys(issueDate);
+    }
+
+    function renderGeneratedKeys(issueDate) {
+      const outputSection = document.getElementById('outputSection');
+      outputSection.classList.remove('hidden');
+      outputSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+      document.getElementById('outputCountBadge').textContent = `تعداد: ${lastGeneratedKeys.length} عدد`;
+
+      // Spec banner
+      const windowConf = ACTIVATION_WINDOW_CONFIG[currentWindow];
+      const durationConf = DURATION_CONFIG[currentDuration];
+      const tierConf = TIER_CONFIG[currentTier];
+      const platformConf = PLATFORM_CONFIG[currentPlatform];
+
+      const deadlineDate = new Date(issueDate.getTime() + (windowConf.days >= 99999 ? 3650 : windowConf.days) * 24 * 3600 * 1000);
+      const formattedIssue = issueDate.toLocaleDateString('fa-IR');
+      const formattedDeadline = deadlineDate.toLocaleDateString('fa-IR');
+
+      document.getElementById('outputSpecBanner').innerHTML = `
+        <div>
+          <span class="text-slate-400 block">نسخه و سطح:</span>
+          <span class="font-bold text-white">${tierConf.label}</span>
+        </div>
+        <div>
+          <span class="text-slate-400 block">پلتفرم مجاز:</span>
+          <span class="font-bold text-white">${platformConf.label}</span>
+        </div>
+        <div>
+          <span class="text-slate-400 block">مدت اعتبار:</span>
+          <span class="font-bold text-amber-400">${durationConf.label}</span>
+        </div>
+        <div>
+          <span class="text-slate-400 block">حداکثر مهلت وارد کردن:</span>
+          <span class="font-bold text-rose-300">تا تاریخ ${formattedDeadline} (${windowConf.label})</span>
+        </div>
+      `;
+
+      // Keys list
+      const container = document.getElementById('keysContainer');
+      container.innerHTML = '';
+
+      lastGeneratedKeys.forEach((key, idx) => {
+        const row = document.createElement('div');
+        row.className = 'flex items-center justify-between gap-3 p-3 rounded-xl bg-slate-950 border border-slate-800 hover:border-slate-700 transition-all';
+        row.innerHTML = `
+          <div class="flex items-center gap-3">
+            <span class="text-xs text-slate-500 font-mono w-6 text-center">${idx + 1}</span>
+            <code class="font-mono-key text-xs sm:text-sm font-bold text-amber-300 tracking-wider select-all" dir="ltr">${key}</code>
+          </div>
+          <button onclick="copySingleKey('${key}', this)" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-xs font-bold transition-all cursor-pointer">
+            کپی
+          </button>
+        `;
+        container.appendChild(row);
+      });
+    }
+
+    function copySingleKey(key, btnElem) {
+      navigator.clipboard.writeText(key);
+      const originalText = btnElem.textContent;
+      btnElem.textContent = '✓ کپی شد';
+      btnElem.classList.add('bg-emerald-700', 'text-white');
+      setTimeout(() => {
+        btnElem.textContent = originalText;
+        btnElem.classList.remove('bg-emerald-700', 'text-white');
+      }, 1500);
+    }
+
+    function copyAllKeys() {
+      if (!lastGeneratedKeys.length) return;
+      navigator.clipboard.writeText(lastGeneratedKeys.join('\n'));
+      const textSpan = document.getElementById('copyAllText');
+      textSpan.textContent = '✓ همه کپی شدند!';
+      setTimeout(() => {
+        textSpan.textContent = 'کپی کلیدها';
+      }, 2000);
+    }
+
+    function downloadAsTxt() {
+      if (!lastGeneratedKeys.length) return;
+      const header = `# کلیدهای لایسنس زمان‌دار یادمان (تولید شده در ${new Date().toLocaleString('fa-IR')})\n# نسخه: ${TIER_CONFIG[currentTier].label} | پلتفرم: ${PLATFORM_CONFIG[currentPlatform].label}\n# مدت اعتبار: ${DURATION_CONFIG[currentDuration].label} | مهلت وارد کردن: ${ACTIVATION_WINDOW_CONFIG[currentWindow].label}\n\n`;
+      const content = header + lastGeneratedKeys.join('\n');
+      const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `yadman-licenses-${Date.now()}.txt`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function downloadAsCsv() {
+      if (!lastGeneratedKeys.length) return;
+      const header = 'Row,LicenseKey,Tier,Platform,Duration,ActivationWindow\n';
+      const rows = lastGeneratedKeys.map((k, i) => `${i + 1},${k},${currentTier},${currentPlatform},${currentDuration},${currentWindow}`).join('\n');
+      const blob = new Blob([header + rows], { type: 'text/csv;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `yadman-licenses-${Date.now()}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    // ==========================================
+    // 4. Validator Actions
+    // ==========================================
+    function pasteToValidator() {
+      navigator.clipboard.readText().then(text => {
+        if (text) {
+          document.getElementById('validatorInput').value = text.trim();
+          handleValidateAction();
+        }
+      }).catch(err => {
+        alert('لطفاً کلید را مستقیماً در کادر پیست نمایید.');
+      });
+    }
+
+    function handleValidateAction() {
+      const input = document.getElementById('validatorInput').value;
+      const card = document.getElementById('validationResultCard');
+      card.classList.remove('hidden');
+
+      const res = validateLicenseString(input);
+      if (!res.isValid) {
+        card.className = 'p-5 rounded-2xl border-2 border-rose-300 bg-rose-50 text-rose-950 space-y-3';
+        card.innerHTML = `
+          <div class="flex items-center gap-2 font-black text-rose-700 text-sm">
+            <span>❌</span>
+            <span>کلید لایسنس نامعتبر است</span>
+          </div>
+          <p class="text-xs text-rose-800 leading-relaxed">${res.error}</p>
+        `;
+        return;
+      }
+
+      const d = res.details;
+      const formattedIssue = d.issueDate.toLocaleDateString('fa-IR');
+      const formattedDeadline = d.activationDeadline.toLocaleDateString('fa-IR');
+
+      card.className = 'p-5 rounded-2xl border-2 border-emerald-400 bg-emerald-50/80 text-emerald-950 space-y-4';
+      card.innerHTML = `
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-emerald-200 pb-3">
+          <div class="flex items-center gap-2 font-black text-emerald-800 text-sm">
+            <span>✓</span>
+            <span>کلید لایسنس کاملاً معتبر و دارای امضای رسمی است</span>
+          </div>
+          <span class="font-mono text-xs px-2.5 py-1 rounded-full bg-emerald-200 text-emerald-900 font-bold" dir="ltr">${d.key}</span>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+          <div class="p-3 rounded-xl bg-white/80 border border-emerald-200">
+            <span class="text-slate-500 block">سطح دسترسی:</span>
+            <span class="font-bold text-slate-900">${d.tierLabel}</span>
+          </div>
+
+          <div class="p-3 rounded-xl bg-white/80 border border-emerald-200">
+            <span class="text-slate-500 block">پلتفرم مجاز:</span>
+            <span class="font-bold text-slate-900">${d.platformLabel}</span>
+          </div>
+
+          <div class="p-3 rounded-xl bg-white/80 border border-emerald-200">
+            <span class="text-slate-500 block">مدت اعتبار:</span>
+            <span class="font-bold text-slate-900">${d.durationLabel}</span>
+          </div>
+
+          <div class="p-3 rounded-xl bg-white/80 border border-emerald-200">
+            <span class="text-slate-500 block">تاریخ صدور:</span>
+            <span class="font-bold text-slate-900">${formattedIssue}</span>
+          </div>
+        </div>
+
+        <div class="p-3.5 rounded-xl ${d.isActivationExpired ? 'bg-rose-100 border border-rose-300 text-rose-900' : 'bg-emerald-100/90 border border-emerald-300 text-emerald-900'} text-xs flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <strong>مهلت ثبت در برنامه:</strong> ${d.activationWindowLabel} (حداکثر تا تاریخ ${formattedDeadline})
+          </div>
+          <div>
+            ${d.isActivationExpired
+              ? '<span class="font-bold text-rose-700">⚠️ مهلت وارد کردن این لایسنس منقضی شده است!</span>'
+              : '<span class="font-bold text-emerald-800">✓ مهلت وارد کردن فعال و مجاز است</span>'
+            }
+          </div>
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>

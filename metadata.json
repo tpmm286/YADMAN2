@@ -1,0 +1,8 @@
+{
+  "name": "Remix یادمان (Ebbinghaus Planner)نسخه دهقان",
+  "description": "سامانه‌ای هوشمند برای مرور هدفمند مطالب بر اساس منحنی فراموشی ابینگهاوس جهت افزایش ماندگاری یادگیری در حافظه بلندمدت.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
